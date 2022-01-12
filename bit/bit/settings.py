@@ -74,15 +74,14 @@ WSGI_APPLICATION = 'bit.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'simpledb',
-        'User':JSONOP().get_setting(".json",{}, os.getcwd()).get("dbuser",""),
-        'Password': JSONOP().get_setting(".json",{}, os.getcwd()).get("dbpass",""),
-        'Host': '127.0.0.1',
-        'Port':'3306'
+        'USER':JSONOP().get_setting(".json",{}, os.getcwd()).get("dbuser",""),
+        'PASSWORD': JSONOP().get_setting(".json",{}, os.getcwd()).get("dbpass",""),
+        'HOST': 'localhost',
+        'PORT':'3306'
 
     }
 }
