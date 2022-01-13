@@ -1,6 +1,6 @@
 # SimpleApp
 ## About The Project
-A simple app that register users and enable them to create products
+A simple app that register users and enables them to create products
 
 ### Built With
 * Python
