@@ -33,7 +33,7 @@ class RegisterAPI(generics.GenericAPIView):
         return Response({
         "user": UserSerializer(user, context=self.get_serializer_context()).data,
      
-        })
+        }) # return the user data in json format
 
 def login_view(request):
     """GET -> view login page , Post -> send required data to login"""
