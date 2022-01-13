@@ -1,16 +1,33 @@
-# Bit68
-## About The Project#
+# SimpleApp
+## About The Project
+A simple app that register users and enable them to create products
 
-[Simple App]
 ### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [Python]
-* [Django]
-* [Mysql]
-* [Django Restframework]
-* [HTML](https://svelte.dev/)
+* Python
+* Django
+* Mysql
+* Django Restframework
+* HTML
 
 <!-- GETTING STARTED -->
 ## Getting Started
+  <ol>
+  <li> 
+    End point for registeration - /register path
+  </li>
+    <li>
+       End point for creating and view products - /products path
+  </li>  
+  <li>
+End point for login - /login path
+  </li>
+  <li>
+  End point for registeration - /register path
+  </li> 
+  <li>
+End point for filtering products - /products/"user_id"
+  </li>
+ <li>
+End point for logout - /logout
+  </li>
+  </ol>
