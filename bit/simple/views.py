@@ -1,8 +1,8 @@
 from django.urls import reverse
-from django.http import HttpResponseRedirect, HttpResponse
-from .models import Product, User
+from django.http import HttpResponseRedirect
+from .models import Product
 from .serializers import ProductSerializer, UserSerializer, RegisterSerializer
-from rest_framework import generics
+from rest_framework import generics, permissions
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.response import Response
 from django.shortcuts import render
@@ -17,12 +17,15 @@ def index(request):
 
 
 class ProductList(generics.ListCreateAPIView):
-    queryset = Product.objects.all().order_by("price")
-    serializer_class = ProductSerializer
+    """Generic View to create and view all products """
+    queryset = Product.objects.all().order_by("price") # get all products ordered by price
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly] # limit access to authorized users
+    serializer_class = ProductSerializer # add queryset to a serializer
 
 
 class RegisterAPI(generics.GenericAPIView):
-    serializer_class = RegisterSerializer
+    """ Generic view to register a new user"""
+    serializer_class = RegisterSerializer 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -33,17 +36,20 @@ class RegisterAPI(generics.GenericAPIView):
         })
 
 def login_view(request):
-    if request.method == "POST":
+    """GET -> view login page , Post -> send required data to login"""
+    if request.method == "POST": 
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request=request, 
-        username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return HttpResponseRedirect(reverse("products"))
-        return render(request, "login.html", {"message":"invalid inputs"})
-    # return HttpResponse("POST  your credientials in JSON FORMAT to url '/login'", 200)
-    return render(request, "login.html")
+        username=username, password=password) # check user credentials
+        if user is not None: # if found a user with right data
+            login(request, user) # login to the system
+            return HttpResponseRedirect(reverse("products")) # redirect to product route
+        return render(request, "login.html", {"message":"invalid inputs"}) 
+    if not request.user.is_authenticated: # ask for data if not registered user
+        return render(request, "login.html")
+    return HttpResponseRedirect(reverse("products")) # in case of already logged user directed to login page
+
 
 def logout_view(request):
     logout(request)
@@ -52,6 +58,6 @@ def logout_view(request):
 
 @api_view(['GET'])
 def get_products(request, user_id:int):
-    products = Product.objects.filter(seller=user_id).order_by('price')
-    serializer = ProductSerializer(products, many=True)
+    products = Product.objects.filter(seller=user_id).order_by('price') # filter products with the seller and order them by price
+    serializer = ProductSerializer(products, many=True) # serialize the data and return it
     return Response(serializer.data)
