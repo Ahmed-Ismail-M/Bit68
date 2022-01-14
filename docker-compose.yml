@@ -2,15 +2,14 @@ version: '3.7'
 
 services:
   db:
-    image: postgres
+    image: mysql:8.0
     restart: always
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - ./mysql_data/db:/var/lib/mysql
     environment:
-      POSTGRES_DB: simpledb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    
+      MYSQL_DATABASE: simpledb
+      MYSQL_PASSWORD: msyql
+      MYSQL_ROOT_PASSWORD: mysql
   web:
     build: .
     command: python bit/manage.py runserver 0.0.0.0:8000
