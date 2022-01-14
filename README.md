@@ -22,9 +22,6 @@ A simple app that register users and enables them to create products
 End point for login - /login path
   </li>
   <li>
-  End point for registeration - /register path
-  </li> 
-  <li>
 End point for filtering products - /products/"user_id"
   </li>
  <li>
