@@ -80,8 +80,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'simpledb',
         'USER':'root',
-        'PASSWORD': JSONOP().get_setting("sk.json",{}, os.getcwd()).get("dbpass",""),
-        'HOST': 'localhost',
+        'PASSWORD': 'mysql',
+        'HOST': 'db',
         'PORT':3306
 
     }
