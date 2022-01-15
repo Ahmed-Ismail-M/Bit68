@@ -9,7 +9,7 @@ from simple.models import Product
 class RegisterationTest(APITestCase):
     def test_registeration(self):
         data = {
-            "username":"ahmed", "email":"ahmed@im-software.net", "password":"testpass", "is_staff":True
+            "username":"ahmed", "email":"ahmed@im-software.net", "password":"testpass"
         }
         response = self.client.post("/register", data)
         self.assertEqual(response.status_code, status.HTTP_200_OK) # assert the registeration completed
