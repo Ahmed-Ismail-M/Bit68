@@ -1,9 +1,3 @@
-# NOTE !! iam new to docker but i managed to search for how to build an image with mysql
-# for unknown reason this script is getting error connecting to mysql 
-# In my opinion the problem arises with the mysql connector that installed in the environment
-
-
-
 version: '3.8'
 
 services:
