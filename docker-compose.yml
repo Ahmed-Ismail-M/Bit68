@@ -14,8 +14,8 @@ services:
       MYSQL_ROOT_PASSWORD: mysql
   web:
     build: .
-    container_name: bit
-    command: python bit/manage.py runserver 0.0.0.0:8000
+    container_name: simpleapp
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
